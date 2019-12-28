@@ -5,8 +5,7 @@ function compression(s) {
   let count = 0;
   for (let i = 0; i < s.length; i++) {
     if (s.substr(i, unit) == s.substr(i + unit, unit)) {
-      s = s.substr(i, unit) + s.substr(i + unit * 2, s.length);
-
+      s = s.substr(i + unit, unit) + s.substr(i + unit, unit);
       console.log(s);
     }
   }
