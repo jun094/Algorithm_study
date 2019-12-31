@@ -1,3 +1,5 @@
+/** @format */
+
 function solution(s) {
   let len = s.length;
   let cut_len = len / 2;
