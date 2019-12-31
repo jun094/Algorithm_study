@@ -1,33 +1,32 @@
-let unit = 3; // 단위
-
-function compression(s) {
+function solution(s) {
   let len = s.length;
-  let answer;
-  let cnt = 0;
+  let cut_len = len / 2;
+  let min = 1000;
 
-  if (len === 1) {
-    answer = 1;
-  } else {
-    for (let i = 0; i <= s.length - unit; i++) {
-      let checkString = s.substr(i, unit); // abc, bca, .., def
+  for (let unit = 1; unit <= cut_len; unit++) {
+    let answer = len;
+    let cnt = 0;
 
-      let j = i + unit; //j=3, j=4, ..., j=9
-      while (true) {
-        if (j >= len) {
-          break;
-        }
-        if (checkString == s.substr(j, unit)) {
-          cnt++; // 3
-          j = j + unit; // j=15
+    if (s.substr(0, unit) != s.substr(unit, unit)) {
+      answer = len;
+    } else {
+      for (let i = 0; i <= len - unit; i++) {
+        let checkString = s.substr(i, unit); // abc, i=0, i=3,i=4, .., i=6, i=9, i=12
 
-          console.log(checkString);
-        } else {
-          break;
+        if (checkString == s.substr(i + unit, unit)) {
+          cnt++;
+          answer = answer - unit;
+
+          if (checkString == s.substr(i - unit, unit) && i - unit >= 0) {
+            cnt--;
+          }
+          i = i + unit - 1;
         }
       }
+      answer = answer + cnt;
     }
+    min = min > answer ? answer : min;
   }
-  console.log(cnt);
-}
 
-compression("abcabcdefdefdef");
+  return min;
+}
