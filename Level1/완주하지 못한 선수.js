@@ -10,6 +10,7 @@ function solution(participant, completion) {
   let answer;
   let cnt = 0,
     cnt2 = 0;
+
   while (bool) {
     console.log("================" + cnt++);
     let check = participant.pop(); // filipa, vinko

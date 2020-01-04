@@ -1,34 +1,50 @@
 /** @format */
-
-function solution(s) {
+function unitCheck(s, unit) {
   let len = s.length;
-  let cut_len = len / 2;
-  let min = 1000;
+  let answer = len;
+  let cnt = 0;
 
-  for (let unit = 1; unit <= cut_len; unit++) {
-    let answer = len;
-    let cnt = 0;
+  let i = 0;
+  let checkString = s.substr(i, unit);
 
-    if (s.substr(0, unit) != s.substr(unit, unit)) {
-      answer = len;
+  while (i <= s.length - unit) {
+    if (checkString == s.substr(i + unit, unit)) {
+      cnt = cnt + 1;
     } else {
-      for (let i = 0; i <= len - unit; i++) {
-        let checkString = s.substr(i, unit); // abc, i=0, i=3,i=4, .., i=6, i=9, i=12
+      len = len - cnt * unit; // 8 - 1 + 1 = 8
 
-        if (checkString == s.substr(i + unit, unit)) {
-          cnt++;
-          answer = answer - unit;
-
-          if (checkString == s.substr(i - unit, unit) && i - unit >= 0) {
-            cnt--;
-          }
-          i = i + unit - 1;
-        }
+      //console.log("-----------------" + cnt);
+      if (cnt > 0 && cnt < 10) {
+        len = len + 1;
+      } else if (cnt > 9 && cnt < 100) {
+        len = len + 2;
       }
-      answer = answer + cnt;
+
+      cnt = 0;
+      checkString = s.substr(i + unit, unit);
     }
-    min = min > answer ? answer : min;
+
+    i = i + unit;
   }
 
-  return min;
+  answer = len;
+  return answer;
 }
+function solution(s) {
+  //console.log(s.length);
+  let len = s.length;
+  let cut_len = len / 2;
+  let unit = 1;
+  let min = 10000;
+
+  if (len === 1) {
+    console.log("1");
+  }
+
+  for (unit; unit <= cut_len; unit++) {
+    min = min > unitCheck(s, unit) ? unitCheck(s, unit) : min;
+  }
+  //console.log(min);
+}
+
+solution("a");
