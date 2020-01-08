@@ -12,9 +12,10 @@ function solution(n, lost, reserve) {
 
   for (let i = 0; i < lost.length; i++) {
     let check = lost[i];
-    console.log(check);
     let c = false;
+
     c = reserve.some(have => {
+      reserve.splice(reserve.indexOf(have), 1);
       return check - 1 === have || check + 1 === have;
     });
 
