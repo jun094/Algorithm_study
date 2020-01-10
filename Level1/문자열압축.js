@@ -13,13 +13,16 @@ function unitCheck(s, unit) {
     } else {
       len = len - cnt * unit; // 8 - 1 + 1 = 8
 
-      //console.log("-----------------" + cnt);
+      console.log("-----------------" + cnt);
       if (cnt > 0 && cnt < 10) {
         len = len + 1;
-      } else if (cnt > 9 && cnt < 100) {
+      } else if (cnt >= 10 && cnt < 100) {
         len = len + 2;
+      } else if (cnt >= 100 && cnt < 1000) {
+        len = len + 3;
+      } else {
+        len = len + 4;
       }
-
       cnt = 0;
       checkString = s.substr(i + unit, unit);
     }
@@ -35,16 +38,18 @@ function solution(s) {
   let len = s.length;
   let cut_len = len / 2;
   let unit = 1;
-  let min = 10000;
+  let min = 100000;
 
   if (len === 1) {
     console.log("1");
+    min = 1;
   }
 
   for (unit; unit <= cut_len; unit++) {
     min = min > unitCheck(s, unit) ? unitCheck(s, unit) : min;
   }
-  //console.log(min);
+  console.log(min);
+  return min;
 }
 
-solution("a");
+solution("aaaaaaaaaa");
