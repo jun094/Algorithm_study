@@ -7,10 +7,9 @@ function solution(progresses, speeds) {
   var answer = [];
   let remain,
     day = [],
-    min = 100,
+    min = Math.ceil((100 - progresses[0]) / speeds[0]),
     count = 0,
-    distribute = 0,
-    temp;
+    distribute = 0;
 
   progresses.forEach((pro, i) => {
     remain = 100 - pro;
@@ -18,14 +17,13 @@ function solution(progresses, speeds) {
 
     console.log(min, day[i]);
     if (min < day[i]) {
-      //temp = min;
       count++;
       distribute = 1;
-      answer[count] = distribute;
-    } else {
-      answer[count] = ++distribute;
       min = day[i];
+    } else {
+      distribute = distribute + 1;
     }
+    answer[count] = distribute;
   });
 
   console.log(answer);
