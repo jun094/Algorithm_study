@@ -1,28 +1,50 @@
 /** @format */
-const priorities = [2, 1, 3, 2];
-const location = 2;
+const priorities = [1, 1, 9, 1, 1, 1];
+const location = 0;
 
 function solution(priorities, location) {
   var answer = 0;
-  const len = priorities.length;
+  let len = priorities.length;
+  let priorStack = [];
 
   priorities.forEach((item, index) => {
-    item = { item: item, index: index };
+    priorStack.push({ index: index, item: item });
   });
 
-  //   priorities.forEach((item, index) => {
-  //     if (index == location) {
-  //       priorities.push({ item: item, index: index });
-  //     }
-  //     for (let i = 0; i < len; i++) {
-  //       if (item < priorities[i]) {
-  //         let temp = priorities.shift();
-  //         priorities.push(temp);
-  //       }
-  //     }
-  //   });
+  console.log(priorStack);
+  console.log("========================");
 
-  console.log(priorities);
+  while (len) {
+    let check = priorStack.shift();
+    let temp = 1;
+    for (let i = 0; i < priorStack.length; i++) {
+      if (check.item < priorStack[i].item) {
+        priorStack.push(check);
+        temp = 0;
+      }
+    }
+    if (temp != 0) {
+      priorStack.unshift(check);
+    }
+
+    len = len - 1;
+  }
+
+  console.log(priorStack);
+  console.log("========================");
+  let i = 1;
+  while (1) {
+    let check = priorStack.shift();
+
+    //console.log(check.index);
+    if (check.index === location) {
+      answer = i;
+      break;
+    }
+    i++;
+  }
+
+  console.log(answer);
   return answer;
 }
 
