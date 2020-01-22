@@ -2,30 +2,27 @@ const skill = 'CBD';
 const skill_trees = ['BACDE', 'CBADF', 'AECB', 'BDA'];
 
 function solution(skill, skill_trees) {
-    var answer = 0;
-    let arr = skill.split('');
-    let count = 0,
-        len,
-        leww;
+    var answer = skill_trees.length;
 
-    skill_trees.forEach(i => {
-        let check = i.split('');
-        let len = check.length;
+    skill_trees.forEach(check => {
+        let arr = skill.split('');
         let flag = false;
 
-        for (let j = 0; j < len; j++) {
-            let temp = check.shift();
-
-            if (temp == arr[count]) {
-                count++;
+        for (const ele of check) {
+            if (arr.length && skill.includes(ele)) {
+                if (arr[0] == ele) {
+                    //check를 돌면서 스킬이 있으면 제일 먼저는 무조건 c !
+                    arr.shift();
+                } else {
+                    flag = true;
+                    break;
+                }
             }
         }
 
-        if (flag == true) {
-            console.log(i);
-            answer++;
+        if (flag) {
+            answer--;
         }
-        count = 0;
     });
 
     console.log(answer);
