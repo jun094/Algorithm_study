@@ -1,28 +1,39 @@
 /** @format */
-const priorities = [1, 1, 9, 1, 1, 1];
+const priorities = [1, 2, 3, 2];
 const location = 0;
-
-function checkPrior(arr, val) {
-    return arr.some(function(arrVal) {
-        console.log(arrVal, val);
-    });
-}
 
 function solution(priorities, location) {
     var answer = 0;
     let len = priorities.length;
     let priorQ = [];
+    let answerQ = [];
+
     priorities.forEach((prior, index) => {
         priorQ.push({ item: index, prior: prior });
     });
-    console.log(priorQ);
+    //console.log(priorQ);
 
-    console.log(priorQ.prior);
+    while (priorQ.length) {
+        let wait = priorQ.shift();
+        let max = Math.max.apply(
+            Math,
+            priorQ.map(function(i) {
+                return i.prior;
+            })
+        );
 
+        if (wait.prior < max) {
+            //대기목록 중에 우선수위가 큰게 하나라도 있으면
+            priorQ.push(wait);
+        } else {
+            answerQ.push(wait);
+        }
+    }
 
-    priorQ.forEach(item => {
-        if (checkPrior(priorQ, item)) {
-            console.log('발견');
+    console.log(answerQ);
+    answerQ.forEach((item, index) => {
+        if (item.item === location) {
+            answer = index + 1;
         }
     });
 
