@@ -17,6 +17,9 @@ function solution(priorities, location) {
     });
     console.log(priorQ);
 
+    console.log(priorQ.prior);
+
+
     priorQ.forEach(item => {
         if (checkPrior(priorQ, item)) {
             console.log('발견');

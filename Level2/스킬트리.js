@@ -5,7 +5,7 @@ function solution(skill, skill_trees) {
     var answer = skill_trees.length;
 
     skill_trees.forEach(check => {
-        let arr = skill.split('');
+        let arr = skill.split(''); //[c,b,d]
         let flag = false;
 
         for (const ele of check) {
