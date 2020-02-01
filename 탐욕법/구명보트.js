@@ -1,31 +1,24 @@
-const people = [70, 40, 60, 50];
-const limit = 120;
+const people = [70, 50, 80, 60, 90, 50];
+const limit = 100;
 
 function solution(people, limit) {
     var answer = 0;
-    people.sort();
+    people.sort((a, b) => b - a);
 
-    while (people.length) {
-        let first = people.shift();
-        let idx = -1;
-
-        people.some((i, index) => {
-            let temp = first + i;
-
-            if (temp > limit) {
-                return true;
-            } else {
-                idx = index;
-            }
-        });
+    while (1) {
+        answer++;
+        let first = people.pop();
+        let idx = people.findIndex(ele => ele + first <= limit);
 
         if (idx >= 0) {
             people.splice(idx, 1);
+        } else {
+            break;
         }
-        answer++;
     }
 
-    console.log(answer);
+    answer = answer + people.length;
+
     return answer;
 }
 
