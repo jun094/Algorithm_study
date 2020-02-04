@@ -16,7 +16,6 @@ function solution(number, k) {
             array = numArr.slice(0, numArr.length - digit + 1);
         }
 
-        console.log(array);
         max = Math.max(...array.map(val => val * 1));
         numArr.splice(0, numArr.indexOf(max.toString()) + 1);
 
