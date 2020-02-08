@@ -2,11 +2,9 @@ const numbers = '173';
 
 function solution(numbers) {
     let answer = 0;
-    let arr = numbers.split('').sort();
-    let numPermu = [];
-
+    let arr = numbers.split('').sort(); // [1,3,7]
     let len = arr.length;
-    while (len) {}
+    let arrCombi = [];
 
     let numArr = pre(arr);
     console.log(numArr);
